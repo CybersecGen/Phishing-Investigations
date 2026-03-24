@@ -1,4 +1,4 @@
-# Phishing Investigations & Awareness Improvement  
+# Phishing Incident Investigation (Email Analysis & IOC Extraction)  
 **Global Payments Provider** 
 
 ---
