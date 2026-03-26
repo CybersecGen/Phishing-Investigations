@@ -1,21 +1,20 @@
-# Phishing Incident Investigation (Email Analysis & IOC Extraction)  
-**Global Payments Provider** 
+# Phishing Incident Investigation (Email Analysis & IOC Extraction)
+
+**Organization:** Global Payments Provider  
+**Project Type:** SOC Investigation / Threat Analysis  
 
 ---
 
 ## Project Overview
 
-This project evaluates phishing risk and strengthens organisational detection and response capabilities within a global payments environment.
-
-The initiative focuses on real world phishing techniques and improving employee reporting behaviour to enhance SOC visibility and incident response effectiveness.
+This project evaluates phishing risk and strengthens organisational detection and response capabilities within a global payments environment.  
+Focus: **real-world phishing techniques, IOC extraction, and SOC visibility**.
 
 ---
 
-## The Challenge
+## Challenge
 
-Phishing attacks continued to bypass technical controls, relying on social engineering to drive user interaction.
-
-Key challenges included:
+Phishing attacks bypassed technical controls and relied on social engineering:
 
 - Limited user identification of malicious emails  
 - Low reporting rates to the SOC  
@@ -23,41 +22,90 @@ Key challenges included:
 
 ---
 
-## Solution
+## SOC Investigation
 
-A structured security improvement programme was implemented:
+### Email Characteristics
 
-### Phishing Assessment & Analysis
-- Analysed phishing attack patterns and user interaction trends  
-- Evaluated reporting behaviour and detection gaps  
-- Identified high-risk departments and behavioural patterns  
+- **Sender Address:** spoofed domain resembling legitimate provider  
+- **Subject:** urgency-driven (e.g., "Account Verification Required")  
+- **Attachment/Link:** embedded malicious URL  
 
-### Security Awareness Enhancement
-- Delivered targeted training on phishing indicators and attacker techniques  
-- Reinforced escalation and reporting procedures  
-- Introduced practical detection guidance for end users  
+### Header Analysis
+
+- SPF/DKIM/DMARC checks: **failed or misaligned**  
+- Originating IP: **not associated with legitimate domain**  
+- Reply-to mismatch observed  
+
+### URL & Payload Analysis
+
+- Link redirected to lookalike login page  
+- Domain contained slight misspelling (typosquatting)  
+- HTTPS used to appear legitimate  
+
+### Tools Used
+
+- **VirusTotal** – check URLs, domains, and file hashes  
+- **MXToolbox** – verify SPF/DKIM/DMARC and email headers  
+- **URLVoid / PhishTool** – check URL reputation  
+- **WHOIS Lookup** – verify domain registration  
 
 ---
 
-## Results
+### Indicators of Compromise (IOCs)
 
-- Phishing reporting rates improved significantly  
-- Reduction in user interaction with malicious emails  
-- Enhanced early detection and SOC visibility  
-- Defined measurable security awareness KPIs  
+- Malicious domain  
+- Sender email address  
+- Source IP address  
+- URL path patterns  
+
+### Investigation Workflow
+
+1. User reported suspicious email  
+2. Email analysed for headers and links  
+3. IOCs extracted and validated with free tools  
+4. Checked SIEM for:
+   - Other recipients  
+   - Similar emails  
+5. Assessed user interaction (clicks/submissions)
 
 ---
 
-## Recommendations
+## SOC Detection Gaps Identified
 
-- Conduct regular phishing assessments  
-- Integrate awareness into onboarding and continuous training  
-- Implement a one-click “Report Phishing” function  
-- Track user reporting metrics as a security performance indicator  
+- No alerting on suspicious domains  
+- Lack of email header validation monitoring  
+- Limited visibility into user click activity  
+
+---
+
+## Detection & Response Improvements
+
+- Block identified malicious domains/IPs  
+- Implement email filtering rules  
+- Add alerting for:
+  - Domain spoofing  
+  - Lookalike domains  
+- Integrate reporting into SIEM (e.g., Microsoft Sentinel)  
+
+---
+
+## Example Attack Flow
+
+ ```text
+ User receives phishing email → clicks link
+ ↓
+ Redirected to fake login page
+ ↓
+ Credentials submitted
+ ↓
+ SOC validates with VirusTotal / MXToolbox
+ ↓
+ SOC blocks domain across environment```
 
 ---
 
 ## Key Takeaway
 
-Strengthening user reporting behaviour significantly improves detection capability and reduces the success rate of social engineering attacks.
-User driven detection remains a critical component of effective security operations.
+Strengthening email analysis and IOC extraction enhances SOC detection capabilities
+Clear investigation steps transform user reports into actionable intelligence
+Integrating findings into SIEM enables proactive threat detection and faster response.
