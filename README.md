@@ -107,6 +107,6 @@ Phishing attacks bypassed technical controls and relied on social engineering:
 
 ## Key Takeaway
 
-Strengthening email analysis and IOC extraction enhances SOC detection capabilities
-Clear investigation steps transform user reports into actionable intelligence
+Strengthening email analysis and IOC extraction enhances SOC detection capabilities.
+Clear investigation steps transform user reports into actionable intelligence.
 Integrating findings into SIEM enables proactive threat detection and faster response.
