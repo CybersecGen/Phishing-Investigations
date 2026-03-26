@@ -100,7 +100,8 @@ Phishing attacks bypassed technical controls and relied on social engineering:
  ↓
  SOC validates with VirusTotal / MXToolbox
  ↓
- SOC blocks domain across environment```
+ SOC blocks domain across environment
+ ```
 
 ---
 
